@@ -137,9 +137,12 @@ function session(options){
 
   // generates the new session
   store.generate = function(req){
+    // provide the ability to override the cookie options on a per request basis
+    var cookieOpts = req.sessionCookieOptions == null ? cookieOptions : req.sessionCookieOptions;
+
     req.sessionID = generateId(req);
     req.session = new Session(req);
-    req.session.cookie = new Cookie(cookieOptions);
+    req.session.cookie = new Cookie(cookieOpts);
 
     if (cookieOptions.secure === 'auto') {
       req.session.cookie.secure = issecure(req, trustProxy);
