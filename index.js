@@ -144,7 +144,7 @@ function session(options){
     req.session = new Session(req);
     req.session.cookie = new Cookie(cookieOpts);
 
-    if (cookieOptions.secure === 'auto') {
+    if (cookieOpts.secure === 'auto') {
       req.session.cookie.secure = issecure(req, trustProxy);
     }
   };
